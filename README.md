@@ -17,9 +17,14 @@ This one took another approach, and this one did mention adding setting to **Sql
 
 ##
 ### Notes (TL:DR)
+#### 1. Set mapper localtion:
 The key is to set 
 
     bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/primary/*.xml"));
 
 in DataSourceConfig to tell each source where to look at xml mappers.   
 In multiple datasource situations, each datasource simply **ignores** mybatis.mapper-locations in application.properties.
+#### 2. MyBatis Plus:
+MyBatis Plus uses its own **MybatisSqlSessionFactoryBean**, not ordinary SqlSessionFactoryBean.   
+MybatisSqlSessionFactoryBean has its own **MybatisConfiguration** class needs to be set. It will not read configs from application.properties.   
+*MyBatis Plus defaults to convert underscores into camel-case*.
