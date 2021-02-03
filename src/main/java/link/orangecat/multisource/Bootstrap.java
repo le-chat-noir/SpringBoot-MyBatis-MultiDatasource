@@ -21,9 +21,9 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(testDao.selectBlog(1).getText());
+        System.out.println(testDao.selectTest(1).getText());
         System.out.println(articleDao.selectArticle().get(0).getA_name());
         System.out.println(videoDao.selectVideo(2).getV_name());
-
+        System.out.println(testDao.selectById(1).getHello_msg());
     }
 }

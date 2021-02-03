@@ -1,12 +1,13 @@
 package link.orangecat.multisource.persistence.dao.primary;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import link.orangecat.multisource.persistence.entity.primary.TestEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
 @Mapper
-public interface TestDao {
+public interface TestDao extends BaseMapper<TestEntity> {
 
-    TestEntity selectBlog(int id);
+    TestEntity selectTest(int id);
 }

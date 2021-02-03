@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="link.orangecat.multisource.persistence.dao.primary.TestDao">
-    <select id="selectBlog" resultType="link.orangecat.multisource.persistence.entity.primary.TestEntity">
+    <select id="selectTest" resultType="link.orangecat.multisource.persistence.entity.primary.TestEntity">
         select * from test where id = #{id}
     </select>
 </mapper>

@@ -1,5 +1,8 @@
 package link.orangecat.multisource.config;
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.MybatisXMLLanguageDriver;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,7 +19,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "link.orangecat.multisource.persistence.dao.primary", sqlSessionTemplateRef  = "PrimarySessionTemplate", sqlSessionFactoryRef = "PrimarySessionFactory")
+@MapperScan(basePackages = "link.orangecat.multisource.persistence.dao.primary", sqlSessionTemplateRef  = "PrimarySessionTemplate")
 public class PrimaryDataSourceConfig {
 
     @Bean(name = "PrimaryDataSource") //As a bean object and named
@@ -30,9 +33,14 @@ public class PrimaryDataSourceConfig {
     @Bean(name = "PrimarySessionFactory")
     @Primary
     public SqlSessionFactory PrimarySessionFactory(@Qualifier("PrimaryDataSource") DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean(); // Use MyBatis-Plus own bean
+//        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/primary/*.xml"));
+        MybatisConfiguration mybatisConfiguration = new MybatisConfiguration();
+        mybatisConfiguration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
+        mybatisConfiguration.setMapUnderscoreToCamelCase(false); // Prevent camel case conversion
+        bean.setConfiguration(mybatisConfiguration);
         return bean.getObject();
     }
 

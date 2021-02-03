@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="link.orangecat.multisource.persistence.dao.primary.ArticleDao">
     <select id="selectArticle" resultType="link.orangecat.multisource.persistence.entity.primary.ArticleEntity">
-        select * from article
+        select a_id, a_name from article
     </select>
 </mapper>
