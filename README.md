@@ -16,7 +16,7 @@ This one tells how to set up multiple datasource, but did not mention how to dea
 This one took another approach, and this one did mention adding setting to **SqlSessionFactory** Bean.
 
 ##
-### Notes
+### Notes (TL:DR)
 The key is to set 
 
     bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/primary/*.xml"));
